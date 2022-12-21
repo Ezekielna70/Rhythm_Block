@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <sstream>
+#include <iostream>
 
 Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed): 
 	animation(texture, imageCount, switchTime)
@@ -10,6 +12,11 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setSize(sf::Vector2f(100.f, 100.f));
 	body.setPosition(640.0f, 440.0f);
 	body.setTexture(texture);
+	score = 0;
+}
+int Player::tampilScore()
+{
+	return score;
 }
 
 Player::~Player()

@@ -2,9 +2,11 @@
 #include <ctime>
 #include <iostream>
 #include <cstdlib>
+#include <SFML/Graphics.hpp>
+
 int n;
-int score;
 bool touch;
+
 
 buah::buah(float x, float y)
 {
@@ -34,15 +36,15 @@ void buah::update(float deltaTime, Player* pemain)
 	}
 	if (is_collision && touch) {
 		n++;
-		score++;
-		std::cout << n << std::endl;
+		pemain -> score++;
+		//std::cout << pemain->score << std::endl;
+		//std::cout << n << std::endl;
 		if (n > 5)
 		{
 			mBola.setFillColor(sf::Color::Transparent);
 			n = 0;
-		}
-		
-		
+			
+		}	
 	}
 }
 
@@ -89,10 +91,7 @@ void buah::isCollision(Player* pemain)
 		}
 	}
 }
-
-void isMouse()
-{
-	
-		
-
-}
+//int buah::getPoints()
+//{
+//	return this->score;
+//}

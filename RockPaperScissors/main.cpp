@@ -2,7 +2,8 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
-
+#include <string>
+#include <sstream>
 
 #include <SFML/Graphics.hpp>
 #include "SFML/Window.hpp"
@@ -23,6 +24,17 @@ int main()
         std::cout << "Error" << std::endl;
     }
 
+    //load Font
+    sf::Font font;
+    font.loadFromFile("Font/Montserrat-BoldItalic.ttf");
+
+    //UI load
+    sf::Text score;
+    score.setFont(font);
+    score.setCharacterSize(40);
+    score.setFillColor(sf::Color::White);
+    score.setPosition(10.f, 10.f);
+
 
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Sprite/flatboy.png");
@@ -39,8 +51,9 @@ int main()
     sf::Music music;
     if (!music.openFromFile("Audio/music.ogg"))
         return -1; // error
+    music.setVolume(10);
     music.play();
-    music.setLoop(true);
+    music.setLoop(1);
 
     //ini mengurus buah
     sf::Clock waktuJatuh;
@@ -51,6 +64,10 @@ int main()
     bool kanan;
     int g;
     srand(time(0));
+
+    std::stringstream ss;
+    int nilai;  
+    std::string str;
 
     while (window.isOpen())
     {
@@ -64,6 +81,10 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 window.close();
         }
+        //mengurus score
+        nilai = player.tampilScore();
+        std::cout << nilai <<std::endl;
+        score.setString("Score :" + std::to_string(nilai));
 
         //mengurus buah
         
@@ -100,14 +121,13 @@ int main()
         }
         player.Update(deltaTime);
 
-
         window.draw(sprite);
         player.Draw(window);
         Buah.render(&window);
         for (int i = 0; i < mBuah.size(); i++) {
             mBuah[i].render(&window);
         }
-
+        window.draw(score);
         window.display();
     }
     return 0;

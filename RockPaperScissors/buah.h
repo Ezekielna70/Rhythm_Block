@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Player.h"
+#include <iostream>
 
 class buah
 {
@@ -14,11 +15,12 @@ public:
 
 	void isCollision(Player* pemain);
 
-	void isMouse();
+	int getPoints();
 
 	bool is_collision;
 
 private:
+	
 	sf::RectangleShape mBola;
 	sf::Vector2f gravity;
 };
